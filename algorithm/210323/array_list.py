@@ -8,7 +8,7 @@ class ArrayList:
         self.array = array.array('l', [0]*capacity)
 
     def _scaleup_capacity(self):  # 캐퍼시티의 용량이 부족할 때 호출
-        self.capacity *= 2  # 용량을 두배로
+        self.capacity *= 2  # 용량을 두배로 (솔루션 참고했음)
         temp_array = array.array('l', [0]*self.capacity)  # 새로운 배열 생성
         for i in range(self.length):
             temp_array[i] = self.array[i]  # 각 배열에 재할당
@@ -44,7 +44,7 @@ class ArrayList:
         self.capacity -= index  # 삭제된 인덱스 수 만큼 캐퍼시티에서 제거 (솔루션 참고했음)
 
     def access(self, index):
-        return self.array[index]  # 해당 인덱스의 요소 반환
+        return self.array[index]
 
     def insert(self, index, value):
         if self.length >= self.capacity:
