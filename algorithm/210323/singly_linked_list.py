@@ -14,6 +14,8 @@ class SinglyLinkedList:
     def _pick_index(self, index) -> Node:
         self.target = self.head
         while index:
+            if self.target == None:
+                raise IndexError
             self.target = self.target.next
             index -= 1
         return self.target

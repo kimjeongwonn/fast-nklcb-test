@@ -15,6 +15,8 @@ class DoublyLinkedList:
         return not bool(self.head) or not bool(self.tail)
 
     def _pick_index(self, index) -> Node:
+        if self.length < index:
+            raise IndexError
         if self.length/2 > index:
             self.target = self.head
             while index:
