@@ -63,7 +63,7 @@ class ArrayList:
     def remove(self, index):
         if index > self.length-1:  # 인덱스가 길이를 초과하면 오류
             raise IndexError
-        for i in range(index, self.length):
+        for i in range(index, self.length):  # 해당 인덱스에 덮어쓰면서 인덱스-1 이동
             self.array[i] = self.array[i+1]
         self.length -= 1
 
