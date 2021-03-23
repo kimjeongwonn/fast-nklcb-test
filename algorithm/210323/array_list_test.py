@@ -1,14 +1,16 @@
-from array_list import ArrayList
+from singly_linked_list import SinglyLinkedList
 
-my_list = ArrayList(8)
+my_list = SinglyLinkedList()
 my_list.print()
 
 for i in range(10):
     my_list.append(i + 1)
+
 my_list.print()
 
 for i in range(10):
     my_list.prepend(i + 1)
+
 my_list.print()
 
 value = my_list.access(3)

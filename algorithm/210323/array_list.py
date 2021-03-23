@@ -20,9 +20,6 @@ class ArrayList:
     def prepend(self, value):
         if self.length >= self.capacity:  # 실제 길이가 캐퍼시티보다 크거나 같다면 2배로 확장
             self._scaleup_capacity()
-        if self.is_empty():  # 배열이 비어있다면 첫 번째 인덱스에 할당하고 길이 할당
-            self.array[0] = value
-            self.length = 1
 
         for i in range(self.length, 0, -1):  # 배열의 길이를 확인 한 뒤 역순으로 순회
             self.array[i] = self.array[i-1]  # 모든 요소를 인덱스+1 로 배치
