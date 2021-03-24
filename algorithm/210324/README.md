@@ -36,6 +36,39 @@ class LinearQueue:
         print(result)
 ```
 
+```bash
+# 솔루션 결과
+[]
+[1, 2, 3]
+1
+2
+3
+queue underflow
+None
+[]
+queue overflow
+[4, 5]
+4
+5
+queue underflow
+None
+[]
+
+# 내 코드 결과
+[]
+[1, 2, 3]
+1
+2
+3
+False
+[]
+[4, 5]
+4
+5
+False
+[]
+```
+
 ### 링크드큐
 
 ```python
@@ -79,4 +112,34 @@ class LinkedQueue:
             result.append(target.value)
             target = target.next
         print(result)
+```
+
+```bash
+# 솔루션 결과
+[]
+[1 2 3 4 5 6 ]
+1
+2
+3
+4
+[5 6 ]
+[5 6 4 5 6 ]
+5
+6
+4
+[5 6 ]
+
+# 내 코드
+[]
+[1, 2, 3, 4, 5, 6]
+1
+2
+3
+4
+[5, 6]
+[5, 6, 4, 5, 6]
+5
+6
+4
+[5, 6]
 ```
