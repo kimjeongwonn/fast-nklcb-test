@@ -15,7 +15,7 @@ class DoublyLinkedList:
         # 선두노드나 말단노드가 없으면 빈 노드 (깨진 노드)
         return not bool(self.head) or not bool(self.tail)
 
-    def _pick_index(self, index) -> Node:
+    def __pick_index(self, index) -> Node:
         if self.length < index:  # 찾는 인덱스가 길이보다 길면 인덱스 범위 에러
             raise IndexError
         if self.length/2 > index:  # 길이의 중간보다 적으면 앞에서부터 탐색
@@ -48,15 +48,15 @@ class DoublyLinkedList:
             self.length += 1
 
     def set_head(self, index):
-        self.head = self._pick_index(index)
+        self.head = self.__pick_index(index)
         self.head.prev = None  # 새롭게 지정한 haed의 prev를 끊어서 끊어진 노드들을 가비지 컬렉션에 추가
         self.length -= index  # 인덱스 만큼 길이 제거
 
     def access(self, index):
-        return self._pick_index(index).value
+        return self.__pick_index(index).value
 
     def insert(self, index, value):
-        self.target = self._pick_index(index)  # 해당 인덱스의 노드 불러오기
+        self.target = self.__pick_index(index)  # 해당 인덱스의 노드 불러오기
         # 불러온 노드의 뒷쪽에 새로운 노드를 배치
         self.temp = Node(value, self.target, self.target.prev)
         self.target.prev.next = self.temp  # 불러온 노드의 이전노드의 next를 새로운노드에 연결
@@ -64,7 +64,7 @@ class DoublyLinkedList:
         self.length += 1
 
     def remove(self, index):
-        self.target = self._pick_index(index)
+        self.target = self.__pick_index(index)
         self.target.prev.next = self.target.next
         self.target.next.prev = self.target.prev
         self.length -= 1

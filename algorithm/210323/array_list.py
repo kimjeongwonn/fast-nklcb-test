@@ -7,7 +7,7 @@ class ArrayList:
         self.length = 0
         self.array = array.array('l', [0]*capacity)
 
-    def _scaleup_capacity(self):  # 캐퍼시티의 용량이 부족할 때 호출
+    def __scaleup_capacity(self):  # 캐퍼시티의 용량이 부족할 때 호출
         self.capacity *= 2  # 용량을 두배로 (솔루션 참고했음)
         temp_array = array.array('l', [0]*self.capacity)  # 새로운 배열 생성
         for i in range(self.length):
@@ -19,7 +19,7 @@ class ArrayList:
 
     def prepend(self, value):
         if self.length >= self.capacity:  # 실제 길이가 캐퍼시티보다 크거나 같다면 2배로 확장
-            self._scaleup_capacity()
+            self.__scaleup_capacity()
 
         for i in range(self.length, 0, -1):  # 배열의 길이를 확인 한 뒤 역순으로 순회
             self.array[i] = self.array[i-1]  # 모든 요소를 인덱스+1 로 배치
@@ -28,7 +28,7 @@ class ArrayList:
 
     def append(self, value):
         if self.length >= self.capacity:
-            self._scaleup_capacity()
+            self.__scaleup_capacity()
 
         self.array[self.length] = value  # 배열의 마지막 인덱스+1에 요소 추가
         self.length += 1  # 배열의 길이 늘리기
@@ -45,7 +45,7 @@ class ArrayList:
 
     def insert(self, index, value):
         if self.length >= self.capacity:
-            self._scaleup_capacity()
+            self.__scaleup_capacity()
         if self.is_empty():
             if index == 0:
                 self.array[0] = value
