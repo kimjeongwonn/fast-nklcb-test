@@ -38,3 +38,15 @@ class LinkedQueue:
             result.append(target.value)
             target = target.next
         print(result)
+
+    def print(self):
+        self.target = self.head
+        if self.head is None or self.tail is None:
+            self.result = '[]'
+        else:
+            self.result = '['
+            while self.target:
+                self.result += str(self.target.value)+', '
+                self.target = self.target.next
+            self.result = self.result[:-2] + ']'
+        print(self.result)

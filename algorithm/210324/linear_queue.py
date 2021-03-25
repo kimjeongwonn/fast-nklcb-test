@@ -31,3 +31,13 @@ class LinearQueue:
         for i in range(self.front, self.rear):
             result.append(self.array[i])
         print(result)
+
+    def print(self):
+        if self.rear == self.front:
+            self.result = '[]'
+        else:
+            self.result = '['
+            for i in range(self.front, self.rear):
+                self.result += str(self.array[i])+', '
+            self.result = self.result[:-2] + ']'
+        print(self.result)

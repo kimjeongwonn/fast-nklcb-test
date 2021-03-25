@@ -87,8 +87,8 @@ class DoublyLinkedList:
             self.result = '[]'
         else:
             self.result = '['
-        while self.target:
-            self.result += str(self.target.value)+', '
-            self.target = self.target.prev
-        self.result = self.result[:-2] + ']'
+            while self.target:
+                self.result += str(self.target.value)+', '
+                self.target = self.target.prev
+            self.result = self.result[:-2] + ']'
         print(self.result)
