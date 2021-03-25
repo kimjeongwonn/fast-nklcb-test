@@ -65,4 +65,4 @@ class ArrayList:
         self.length -= 1
 
     def print(self):
-        print([self.array[i] for i in range(self.length)])
+        print(self.array.tolist())

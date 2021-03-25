@@ -52,8 +52,12 @@ class SinglyLinkedList:
 
     def print(self):
         self.target = self.head
-        self.result = []
+        if self.target == None:
+            self.result = '[]'
+        else:
+            self.result = '['
         while self.target:
-            self.result.append(self.target.value)
+            self.result += str(self.target.value)+', '
             self.target = self.target.next
+        self.result = self.result[:-2] + ']'
         print(self.result)
