@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="login-box">
+        <img class="logo-image" src="assets/ui/Logo.png" width="246px" />
+        <form name="login" method="post">
+          <div class="login-input">
+            <label class="text-wrapper">
+              <span class="input-icon"><img src="assets/form/mail.png" width="20px" /></span>
+              <input id="id-form" type="email" placeholder="아이디(이메일)" required />
+              <div class="invalid">아이디(이메일)를 입력해주세요.</div>
+            </label>
+            <label class="text-wrapper">
+              <span class="input-icon"><img src="assets/form/lock.png" width="20px" /></span>
+              <input id="pw-form" type="password" placeholder="비밀번호" required />
+              <div class="invalid">비밀번호를 입력해주세요.</div>
+            </label>
+
+            <div class="login-options">
+              <div>
+                <label class="checkbox-wrapper">
+                  <input type="checkbox" name="auto-login" id="auto-login" />
+                  <span class="checkmark"></span>자동 로그인
+                </label>
+              </div>
+              <a href="">아이디(이메일)/비밀번호 찾기</a>
+            </div>
+          </div>
+          <div class="login-button">
+            <input type="submit" value="로그인" />
+            <hr />
+            <input type="button" value="회원가입" />
+          </div>
+          <div class="copyright">ⓒCoupang Corp. All rights reserved.</div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
