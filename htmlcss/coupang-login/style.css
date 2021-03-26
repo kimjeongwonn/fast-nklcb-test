@@ -89,8 +89,12 @@ body {
   border: none;
 }
 
-.login-input .text-wrapper input:required {
-  border: 1px solid var(--color-light-gray);
+.login-input .text-wrapper input:focus + .invalid {
+  display: none !important;
+}
+
+.login-input .text-wrapper input:focus {
+  border: 1px solid var(--color-light-gray) !important;
 }
 
 .login-input .text-wrapper input:required + .invalid {
