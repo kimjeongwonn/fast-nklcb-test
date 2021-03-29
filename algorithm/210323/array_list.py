@@ -7,12 +7,21 @@ class ArrayList:
         self.length = 0
         self.array = array.array('l', [0]*capacity)
 
-    def __scaleup_capacity(self):  # 캐퍼시티의 용량이 부족할 때 호출
+    def __scaleup_capacity(self, value=None, index=None):  # 캐퍼시티의 용량이 부족할 때 호출
         self.capacity *= 2  # 용량을 두배로 (솔루션 참고했음)
         temp_array = array.array('l', [0]*self.capacity)  # 새로운 배열 생성
-        for i in range(self.length):
-            temp_array[i] = self.array[i]  # 각 배열에 재할당
-        self.array = temp_array  # 배열 교체
+        if value is not None and index is not None:
+            for i in range(0, index):
+                temp_array[i] = self.array[i]  # 지정인덱스 -1까지 재할당
+            for i in range(index+1, self.length+1):  # 지정인덱스 +1부터 재할당
+                temp_array[i] = self.array[i-1]
+            temp_array[index] = value  # 지정인덱스에 값 할당
+            self.array = temp_array  # 배열 교체
+            self.length += 1
+        else:
+            for i in range(self.length):
+                temp_array[i] = self.array[i]  # 각 배열에 재할당
+            self.array = temp_array  # 배열 교체
 
     def is_empty(self):
         return not bool(self.length)  # 빈 배열이라면 True
@@ -44,18 +53,21 @@ class ArrayList:
         return self.array[index]
 
     def insert(self, index, value):
-        if self.length >= self.capacity:
-            self.__scaleup_capacity()
         if self.is_empty():
             if index == 0:
                 self.array[0] = value
                 self.length = 1
             else:
                 raise IndexError  # 인덱스가 비어있을 때 0번 인덱스 이외에 요소를 추가할 경우 에러
-        for i in range(self.length, index, -1):  # 배열의 끝부터 해당 인덱스+1 이동
-            self.array[i] = self.array[i-1]
-        self.array[index] = value
-        self.length += 1
+
+        if self.length >= self.capacity:
+            # 확장해야 한다면 값과 인덱스를 전달하여 복사를 한 번만 해서 진행
+            self.__scaleup_capacity(value, index)
+        else:
+            for i in range(self.length, index, -1):  # 배열의 끝부터 해당 인덱스+1 이동
+                self.array[i] = self.array[i-1]
+            self.array[index] = value
+            self.length += 1
 
     def remove(self, index):
         if index > self.length-1:  # 인덱스가 길이를 초과하면 오류

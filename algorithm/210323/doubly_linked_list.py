@@ -19,17 +19,17 @@ class DoublyLinkedList:
         if self.length < index:  # 찾는 인덱스가 길이보다 길면 인덱스 범위 에러
             raise IndexError
         if self.length/2 > index:  # 길이의 중간보다 적으면 앞에서부터 탐색
-            self.target = self.head
+            target = self.head
             while index:
-                self.target = self.target.next
+                target = target.next
                 index -= 1
         else:  # 그렇지 않으면 뒤에서부터 탐색
-            self.target = self.tail
+            target = self.tail
             while self.length > index:
-                self.target = self.target.prev
+                target = target.prev
                 index += 1
 
-        return self.target
+        return target
 
     def prepend(self, value):
         if self.is_empty():  # 리스트가 비어 있다면 head와 tail에 노드 추가
@@ -56,39 +56,39 @@ class DoublyLinkedList:
         return self.__pick_index(index).value
 
     def insert(self, index, value):
-        self.target = self.__pick_index(index)  # 해당 인덱스의 노드 불러오기
+        target = self.__pick_index(index)  # 해당 인덱스의 노드 불러오기
         # 불러온 노드의 뒷쪽에 새로운 노드를 배치
-        self.temp = Node(value, self.target, self.target.prev)
-        self.target.prev.next = self.temp  # 불러온 노드의 이전노드의 next를 새로운노드에 연결
-        self.target.prev = self.temp  # 이전 노드를 새로운 노드로 교체
+        temp = Node(value, target, target.prev)
+        target.prev.next = temp  # 불러온 노드의 이전노드의 next를 새로운노드에 연결
+        target.prev = temp  # 이전 노드를 새로운 노드로 교체
         self.length += 1
 
     def remove(self, index):
-        self.target = self.__pick_index(index)
-        self.target.prev.next = self.target.next
-        self.target.next.prev = self.target.prev
+        target = self.__pick_index(index)
+        target.prev.next = target.next
+        target.next.prev = target.prev
         self.length -= 1
 
     def print(self):
-        self.target = self.head
-        if self.target == None:
+        target = self.head
+        if target == None:
             self.result = '[]'
         else:
             self.result = '['
-        while self.target:
-            self.result += str(self.target.value)+', '
-            self.target = self.target.next
+        while target:
+            self.result += str(target.value)+', '
+            target = target.next
         self.result = self.result[:-2] + ']'
         print(self.result)
 
     def print_inverse(self):
-        self.target = self.tail
-        if self.target == None:
+        target = self.tail
+        if target == None:
             self.result = '[]'
         else:
             self.result = '['
-            while self.target:
-                self.result += str(self.target.value)+', '
-                self.target = self.target.prev
+            while target:
+                self.result += str(target.value)+', '
+                target = target.prev
             self.result = self.result[:-2] + ']'
         print(self.result)

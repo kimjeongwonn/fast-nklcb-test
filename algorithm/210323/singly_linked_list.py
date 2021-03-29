@@ -12,19 +12,19 @@ class SinglyLinkedList:
         return not bool(self.head)
 
     def __pick_index(self, index) -> Node:  # 인덱스에 해당하는 노드를 반환
-        self.target = self.head
+        target = self.head
         while index:  # 인덱스 숫자만큼 앞으로 이동
-            if self.target == None:  # 중간에 노드가 없으면 인덱스 범위가 벗어났으므로 에러
+            if target == None:  # 중간에 노드가 없으면 인덱스 범위가 벗어났으므로 에러
                 raise IndexError
-            self.target = self.target.next
+            target = target.next
             index -= 1
-        return self.target
+        return target
 
     def __pick_termianl(self) -> Node:  # 말단노드를 반환
-        self.target = self.head
-        while self.target.next:
-            self.target = self.target.next
-        return self.target
+        target = self.head
+        while target.next:
+            target = target.next
+        return target
 
     def prepend(self, value):
         self.head = Node(value, self.head)
@@ -42,22 +42,22 @@ class SinglyLinkedList:
         return self.__pick_index(index).value
 
     def insert(self, index, value):
-        self.target = self.__pick_index(index-1)  # 해당 인덱스 이전 노드를 선택
+        target = self.__pick_index(index-1)  # 해당 인덱스 이전 노드를 선택
         # 새로운 노드의 next를 선택 노드의 다음 노드와 잇고 선택한 노드의 next에 배치
-        self.target.next = Node(value, self.target.next)
+        target.next = Node(value, target.next)
 
     def remove(self, index):
-        self.target = self.__pick_index(index-1)
-        self.target.next = self.target.next.next  # 선택한 노드를 건너띄어 연결
+        target = self.__pick_index(index-1)
+        target.next = target.next.next  # 선택한 노드를 건너띄어 연결
 
     def print(self):
-        self.target = self.head
-        if self.target == None:
+        target = self.head
+        if target == None:
             self.result = '[]'
         else:
             self.result = '['
-            while self.target:
-                self.result += str(self.target.value)+', '
-                self.target = self.target.next
+            while target:
+                self.result += str(target.value)+', '
+                target = target.next
             self.result = self.result[:-2] + ']'
         print(self.result)
