@@ -1,5 +1,3 @@
-import random
-
 
 class Node:
     def __init__(self, value, left=None, right=None):
@@ -104,9 +102,6 @@ class BinarySearchTree:
         node, parent, direction = self.__search(value)
         if node == None:  # 찾은 노드가 없다면
             return False
-        if node is self.root:  # 찾은 노드라 루트노드라면
-            self.root = None  # 루트노드를 삭제! 이 경우 display 메서드 사용불가!
-            return True
         if node.right:  # 오른쪽에 자식노드가 있다면
             target = node.right  # 오른쪽 자식노드로 이동
             target_parent = node
@@ -127,9 +122,10 @@ class BinarySearchTree:
                 target.right = node.right  # 좌하단 리프노드의 오른쪽자식에 삭제할 노드의 자식연결
 
             # 위 순서를 지키지 않으면 node와 target_parent가 같을경우 제대로 연결이 되지않음!
-
             del node  # 기존 노드 삭제 == 모든 연결 해제
-
+            if parent is None:
+                self.root = target
+                return True
             if direction == "right":  # 삭제할 노드가 오른쪽 자식이라면
                 parent.right = target  # 삭제할 노드의 부모노드의 오른쪽 자식으로 좌하단 리프노드를 가져옴
             else:  # 왼쪽 자식이라면
@@ -151,6 +147,9 @@ class BinarySearchTree:
             if node.right is not target:
                 target.right = node.right
             del node
+            if parent is None:
+                self.root = target
+                return True
             if direction == "right":
                 parent.right = target
             else:
@@ -165,3 +164,14 @@ class BinarySearchTree:
                 del node
                 parent.left = None
             return True
+
+
+bst = BinarySearchTree()
+
+x = [10, 12, 8, 2, 19, 6]
+for el in x:
+    bst.insert(el)
+bst.root.display()
+
+bst.remove(10)
+bst.root.display()
