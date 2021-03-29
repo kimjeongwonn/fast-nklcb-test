@@ -3,13 +3,11 @@
 ```python
 # ... remove 메서드를 제외하고 생략
 
+
     def remove(self, value):
         node, parent, direction = self.__search(value)
         if node == None:  # 찾은 노드가 없다면
             return False
-        if node is self.root:  # 찾은 노드라 루트노드라면
-            self.root = None # 루트노드를 삭제! 이 경우 display 메서드 사용불가!
-            return True
         if node.right:  # 오른쪽에 자식노드가 있다면
             target = node.right  # 오른쪽 자식노드로 이동
             target_parent = node
@@ -21,17 +19,19 @@
                 target.left = node.left  # 좌하단 리프노드의 왼쪽자식에 삭제할 노드의 자식연결
 
             if target.right:  # 좌하단 노드의 오른쪽 자식노드가 있다면
-                target_parent.left = target.right # 좌하단 노드의 부모노드와 좌하단 노드의 오른쪽 자식노드를 연결, 좌하단 노드는 부모와 연결해제
+                # 좌하단 노드의 부모노드와 좌하단 노드의 오른쪽 자식노드를 연결, 좌하단 노드는 부모와 연결해제
+                target_parent.left = target.right
             else:  # 좌하단 노드의 오른쪽 자식노드가 없다면
                 target_parent.left = None  # 좌하단 노드와 부모노드의 연결만 해제
 
-            if node.right is not target: # 삭제할 노드의 오른쪽이 자기자신이 아니라면
-                target.right = node.right # 좌하단 리프노드의 오른쪽자식에 삭제할 노드의 자식연결
+            if node.right is not target:  # 삭제할 노드의 오른쪽이 자기자신이 아니라면
+                target.right = node.right  # 좌하단 리프노드의 오른쪽자식에 삭제할 노드의 자식연결
 
             # 위 순서를 지키지 않으면 node와 target_parent가 같을경우 제대로 연결이 되지않음!
-
-            del node # 기존 노드 삭제 == 모든 연결 해제
-
+            del node  # 기존 노드 삭제 == 모든 연결 해제
+            if parent is None:
+                self.root = target
+                return True
             if direction == "right":  # 삭제할 노드가 오른쪽 자식이라면
                 parent.right = target  # 삭제할 노드의 부모노드의 오른쪽 자식으로 좌하단 리프노드를 가져옴
             else:  # 왼쪽 자식이라면
@@ -53,6 +53,9 @@
             if node.right is not target:
                 target.right = node.right
             del node
+            if parent is None:
+                self.root = target
+                return True
             if direction == "right":
                 parent.right = target
             else:
