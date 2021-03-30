@@ -64,18 +64,16 @@ class BinaryTree:
         print(result)
 
     def bfs(self, value):
-        def recursive(queue):
-            try:
-                node = queue.pop(0)
-                if node.value == value:
-                    return True
-            except:
-                return False
-            queue.append(node.left)
-            queue.append(node.right)
-            return recursive(queue)
-
-        return recursive([self.root])
+        queue = [self.root]
+        while queue:
+            node = queue.pop(0)
+            if node.value == value:
+                return True
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        return False
 
     def dfs(self, value):
         def recursive(node: Node):
