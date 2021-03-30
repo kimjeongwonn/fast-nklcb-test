@@ -1,4 +1,3 @@
-
 class Node:
     def __init__(self, value, left=None, right=None):
         self.value = value
@@ -102,7 +101,27 @@ class BinarySearchTree:
         node, parent, direction = self.__search(value)
         if node == None:  # 찾은 노드가 없다면
             return False
-        if node.right:  # 오른쪽에 자식노드가 있다면
+        if node.right and not node.left:  # 오른쪽에만 노드가 있다면
+            if parent is None:  # 삭제할 노드가 부모노드라면
+                self.root = node.right
+                return
+            if direction == "right":
+                parent.right = node.right
+            else:
+                parent.left = node.right
+            del node
+            return True
+        elif node.left and not node.right:  # 왼쪽에만 노드가 있다면
+            if parent is None:
+                self.root = node.left
+                return
+            if direction == "right":
+                parent.right = node.left
+            else:
+                parent.left = node.left
+            del node
+            return True
+        elif node.right and node.left:  # 양쪽에 자식노드가 있다면
             target = node.right  # 오른쪽 자식노드로 이동
             target_parent = node
             while target.left:  # 오른쪽 자식노드에 왼쪽자식노드가 있다면
@@ -132,29 +151,29 @@ class BinarySearchTree:
                 parent.left = target  # 삭제할 노드의 부모노드의 왼쪽 자식으로 좌하단 리프노드를 가져옴
             return True
 
-        elif node.left:  # 오른쪽에 자식노드가 없고 왼쪽에 자식노드가 있다면 위의 로직을 방향을 바꿔서 실행하기 때문에 주석 생략
-            target = node.left
-            target_parent = node
-            while target.right:
-                target_parent = target
-                target = target.right
-            if node.left is not target:
-                target.left = node.left
-            if target.right:
-                target_parent.right = target.left
-            else:
-                target_parent.right = None
-            if node.right is not target:
-                target.right = node.right
-            del node
-            if parent is None:
-                self.root = target
-                return True
-            if direction == "right":
-                parent.right = target
-            else:
-                parent.left = target
-            return True
+        # else:  # 오른쪽에 자식노드가 없고 왼쪽에 자식노드가 있다면 위의 로직을 방향을 바꿔서 실행하기 때문에 주석 생략
+        #     target = node.left
+        #     target_parent = node
+        #     while target.right:
+        #         target_parent = target
+        #         target = target.right
+        #     if node.left is not target:
+        #         target.left = node.left
+        #     if target.right:
+        #         target_parent.right = target.left
+        #     else:
+        #         target_parent.right = None
+        #     if node.right is not target:
+        #         target.right = node.right
+        #     del node
+        #     if parent is None:
+        #         self.root = target
+        #         return True
+        #     if direction == "right":
+        #         parent.right = target
+        #     else:
+        #         parent.left = target
+        #     return True
 
         else:  # 리프노드인 경우
             if direction == "right":
@@ -164,14 +183,3 @@ class BinarySearchTree:
                 del node
                 parent.left = None
             return True
-
-
-bst = BinarySearchTree()
-
-x = [10, 12, 8, 2, 19, 6]
-for el in x:
-    bst.insert(el)
-bst.root.display()
-
-bst.remove(10)
-bst.root.display()
