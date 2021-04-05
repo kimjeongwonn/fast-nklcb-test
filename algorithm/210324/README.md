@@ -88,14 +88,13 @@ class Node:
         self.prev = prev
         self.next = next
 
-
 class LinkedQueue:
     def __init__(self):
         self.head = None
         self.tail = None
 
     def put(self, value):
-        if self.head is None or self.tail is None:
+        if self.head is None:
             self.head = self.tail = Node(value, None, None)
             return True
         self.tail.next = Node(value, self.tail, None)
@@ -103,15 +102,16 @@ class LinkedQueue:
         return True
 
     def get(self):
-        if self.head is None or self.tail is None:
+        if self.head is None:
             return False
         target = self.head
         self.head = self.head.next
         target.next = None
+        self.head.prev = None
         return target.value
 
     def peek(self):
-        if self.head is None or self.tail is None:
+        if self.head is None:
             return False
         return self.head.value
 
@@ -125,7 +125,7 @@ class LinkedQueue:
 
     def print(self):
         self.target = self.head
-        if self.head is None or self.tail is None:
+        if self.head is None:
             self.result = '[]'
         else:
             self.result = '['
