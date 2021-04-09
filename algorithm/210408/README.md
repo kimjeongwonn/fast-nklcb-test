@@ -1,4 +1,4 @@
-![](./img/01.png)
+
 
 ```python
 def solution(words, queries):
@@ -65,3 +65,5 @@ def solution(words, queries):
     search_query(trie, queries)
     return result
 ```
+
+![](./img/01.png)
