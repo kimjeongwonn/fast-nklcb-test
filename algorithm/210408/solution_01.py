@@ -29,7 +29,7 @@ def solution(words, queries):
                 i += 1
 
     append_words(trie, words)
-    append_words(trie_reverse, map(lambda x: "".join(reversed(x)), words))
+    append_words(trie_reverse, map(lambda x: x[::-1], words))
 
     def search_query(t, q):
         for query in q:
@@ -47,7 +47,7 @@ def solution(words, queries):
                         break
 
                     if q_idx == 0:
-                        search_query(trie_reverse, ["".join(reversed(query))])
+                        search_query(trie_reverse, [query[::-1]])
                         break
                     else:
                         for i in last_node:
